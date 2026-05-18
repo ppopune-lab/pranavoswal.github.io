@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pranav Oswal — Off/Beat Portfolio</title>
+  <meta name="description" content="Editorial single-page portfolio for Pranav Oswal's application to the core business team at Off/Beat." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0b0c;
+      --bg-2: #121214;
+      --panel: #141417;
+      --panel-2: #18181c;
+      --line: rgba(255,255,255,0.09);
+      --line-strong: rgba(255,255,255,0.14);
+      --text: #f1f1ee;
+      --muted: rgba(241,241,238,0.72);
+      --faint: rgba(241,241,238,0.42);
+      --accent: #b8ff4f;
+      --accent-soft: rgba(184,255,79,0.08);
+      --accent-line: rgba(184,255,79,0.28);
+      --shadow: 0 24px 60px rgba(0,0,0,0.36);
+      --radius: 22px;
+      --max: 1180px;
+      --nav-h: 74px;
+      --text-xs: clamp(0.75rem, 0.72rem + 0.18vw, 0.86rem);
+      --text-sm: clamp(0.92rem, 0.86rem + 0.2vw, 1rem);
+      --text-base: clamp(1rem, 0.96rem + 0.24vw, 1.08rem);
+      --text-lg: clamp(1.14rem, 1.04rem + 0.6vw, 1.42rem);
+      --text-xl: clamp(1.65rem, 1.18rem + 1.7vw, 2.8rem);
+      --text-2xl: clamp(2.5rem, 1.2rem + 4.6vw, 5.6rem);
+      --text-hero: clamp(3.7rem, 9vw, 7.3rem);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .05;
+      z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    .skip-link {
+      position: absolute;
+      top: -3rem;
+      left: 1rem;
+      background: var(--text);
+      color: #000;
+      padding: .75rem 1rem;
+      border-radius: 999px;
+      z-index: 1000;
+      font-weight: 700;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-h);
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(11,11,12,0.7);
+      border-bottom: 1px solid transparent;
+      transition: background .25s ease, border-color .25s ease;
+    }
+    .nav.scrolled {
+      background: rgba(11,11,12,0.9);
+      border-color: var(--line);
+    }
+    .nav-inner,
+    .section {
+      width: min(var(--max), calc(100% - 1.5rem));
+      margin: 0 auto;
+    }
+    .nav-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: .72rem;
+      color: var(--text);
+    }
+    .brand-mark {
+      min-width: 2.2rem;
+      height: 2.2rem;
+      padding: 0 .55rem;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(255,255,255,0.02);
+      flex: 0 0 auto;
+    }
+    .brand-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.84rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text);
+      white-space: nowrap;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav-links a {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--muted);
+      position: relative;
+    }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: .6rem;
+      height: 1px;
+      background: var(--accent-line);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .25s ease;
+    }
+    .nav-links a:hover,
+    .nav-links a:focus-visible { color: var(--text); }
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after { transform: scaleX(1); }
+
+    main { position: relative; z-index: 1; }
+    .section { padding: clamp(4.5rem, 7vw, 7.5rem) 0; }
+    .section-rule {
+      width: min(var(--max), calc(100% - 1.5rem));
+      margin: 0 auto;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,0), var(--line), rgba(255,255,255,0));
+    }
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: .22em;
+      font-size: var(--text-xs);
+      color: var(--faint);
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Montserrat', sans-serif;
+      line-height: .94;
+      letter-spacing: -.04em;
+      text-wrap: balance;
+    }
+    h2 { font-size: clamp(2.1rem, 1.2rem + 3.2vw, 4.6rem); margin-bottom: 1rem; }
+    p { max-width: 70ch; color: var(--muted); font-size: var(--text-base); }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      align-items: center;
+      padding-top: calc(var(--nav-h) + 2rem);
+      padding-bottom: 2rem;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(280px, .82fr);
+      gap: clamp(2rem, 4vw, 4.5rem);
+      align-items: center;
+    }
+    .hero-title {
+      font-size: var(--text-hero);
+      max-width: 8ch;
+      color: var(--text);
+    }
+    .hero-title .break { display: block; }
+    .hero-sub {
+      margin-top: 1.4rem;
+      min-height: 4.1rem;
+      color: var(--text);
+      font-size: clamp(1.08rem, 0.98rem + 0.7vw, 1.55rem);
+      max-width: 29ch;
+    }
+    .typed::after {
+      content: "";
+      display: inline-block;
+      width: 1px;
+      height: 1.05em;
+      background: var(--accent);
+      margin-left: .3rem;
+      transform: translateY(.15em);
+      animation: blink .8s steps(1) infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    .hero-meta,
+    .badge-cloud,
+    .language-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+    }
+    .hero-meta { margin-top: 1.8rem; }
+    .chip,
+    .pill {
+      padding: .72rem .95rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--text);
+    }
+    .cta-row {
+      display: flex;
+      gap: .9rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    .btn {
+      min-height: 46px;
+      padding: .9rem 1.15rem;
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      font-size: var(--text-xs);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: .7rem;
+      transition: transform .22s ease, background .22s ease, border-color .22s ease;
+    }
+    .btn-primary {
+      background: var(--text);
+      color: #090909;
+      font-weight: 800;
+    }
+    .btn-secondary { color: var(--text); background: rgba(255,255,255,0.02); }
+    .btn:hover,
+    .btn:focus-visible {
+      transform: translateY(-2px);
+      border-color: var(--accent-line);
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 62vh;
+      display: grid;
+      align-items: center;
+      justify-items: end;
+    }
+    .photo-frame {
+      width: min(100%, 420px);
+      aspect-ratio: .84;
+      background: var(--panel);
+      border: 1px solid var(--line-strong);
+      border-radius: 28px 28px 14px 28px;
+      overflow: hidden;
+      transform: rotate(-3deg);
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+    .photo-frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent 36%, rgba(0,0,0,0.16));
+      pointer-events: none;
+      z-index: 1;
+    }
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(1) contrast(1.06) brightness(.94);
+    }
+    .photo-frame-fallback {
+      width: 100%;
+      height: 100%;
+      display: none;
+      padding: 1.5rem;
+      align-items: end;
+      background: linear-gradient(145deg, #111214, #1a1b1f);
+      color: var(--text);
+    }
+    .photo-frame-fallback strong {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.5rem, 1rem + 2vw, 2.2rem);
+      line-height: .98;
+      display: block;
+      max-width: 8ch;
+    }
+    .photo-frame-fallback span {
+      display: block;
+      margin-top: .7rem;
+      color: var(--muted);
+      max-width: 16ch;
+      font-size: var(--text-sm);
+    }
+    .floating-note {
+      position: absolute;
+      left: -1rem;
+      bottom: 1.8rem;
+      background: rgba(16,16,18,0.92);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1rem;
+      max-width: 220px;
+      box-shadow: var(--shadow);
+    }
+    .floating-note span {
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      color: var(--faint);
+      font-size: var(--text-xs);
+      margin-bottom: .4rem;
+    }
+    .floating-note strong {
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+      line-height: 1.05;
+      font-size: 1rem;
+    }
+
+    .about-grid,
+    .contact-grid,
+    .theme-card {
+      display: grid;
+      gap: clamp(1.25rem, 3vw, 2.2rem);
+    }
+    .about-grid,
+    .contact-grid { grid-template-columns: .88fr 1.12fr; }
+    .sticky-label {
+      position: sticky;
+      top: calc(var(--nav-h) + 1.1rem);
+      align-self: start;
+    }
+    .lede {
+      color: var(--text);
+      font-size: clamp(1.08rem, 1rem + 0.8vw, 1.5rem);
+      max-width: 24ch;
+    }
+    .about-copy { display: grid; gap: 1rem; }
+    .text-strong { color: var(--text); font-weight: 700; }
+
+    .work-wrap { display: grid; gap: 1rem; margin-top: 2rem; }
+    .theme-card {
+      grid-template-columns: .65fr 1.35fr;
+      padding: clamp(1.25rem, 2vw, 1.8rem);
+      background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.015));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+    .theme-label { display: grid; gap: 1rem; align-content: start; }
+    .theme-symbol {
+      color: var(--accent);
+      font-size: 1.5rem;
+      opacity: .88;
+    }
+    .theme-label h3 {
+      font-size: clamp(1.55rem, 1.05rem + 1.8vw, 2.7rem);
+      text-transform: uppercase;
+    }
+    .theme-body { display: grid; gap: .95rem; }
+    .theme-body ul { list-style: none; display: grid; gap: .8rem; }
+    .theme-body li {
+      position: relative;
+      padding-left: 1rem;
+      color: var(--muted);
+    }
+    .theme-body li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .72rem;
+      width: .35rem;
+      height: .35rem;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: .9;
+    }
+    .inline-link {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-size: var(--text-sm);
+      color: var(--text);
+      border-bottom: 1px solid var(--accent-line);
+      padding-bottom: .15rem;
+    }
+
+    .timeline {
+      margin-top: 2rem;
+      position: relative;
+      display: grid;
+      gap: 1.3rem;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: .75rem;
+      top: .25rem;
+      bottom: .25rem;
+      width: 1px;
+      background: linear-gradient(180deg, var(--accent-line), rgba(255,255,255,0.08));
+    }
+    .timeline-item {
+      position: relative;
+      padding-left: 2.8rem;
+    }
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: .37rem;
+      top: .33rem;
+      width: .8rem;
+      height: .8rem;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 1px solid var(--accent-line);
+    }
+    .timeline-meta {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: .75rem;
+      margin-bottom: .35rem;
+    }
+    .timeline-meta h3 {
+      font-size: clamp(1.16rem, 1rem + 1vw, 1.7rem);
+      letter-spacing: -.03em;
+    }
+    .timeline-meta span {
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--faint);
+    }
+
+    .credentials-box {
+      margin-top: 2rem;
+      padding: clamp(1.25rem, 2vw, 1.75rem);
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .contact-statement {
+      font-size: clamp(1.75rem, 1.2rem + 2.4vw, 3.6rem);
+      max-width: 12ch;
+      line-height: 1.02;
+      color: var(--text);
+    }
+    .contact-links {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+    .contact-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .label {
+      display: block;
+      margin-bottom: .35rem;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--faint);
+      font-size: var(--text-xs);
+    }
+    .contact-item a,
+    .contact-item div:last-child {
+      font-size: var(--text-lg);
+      color: var(--text);
+      word-break: break-word;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .slide-left { transform: translateX(-24px); }
+    .slide-right { transform: translateX(24px); }
+    .slide-left.in-view,
+    .slide-right.in-view { transform: translateX(0); }
+
+    .footer-note {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--faint);
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .about-grid,
+      .contact-grid,
+      .theme-card { grid-template-columns: 1fr; }
+      .hero-visual { justify-items: start; min-height: auto; }
+      .photo-frame { width: min(84vw, 420px); }
+      .floating-note {
+        left: auto;
+        right: -0.4rem;
+      }
+      .sticky-label { position: static; }
+    }
+    @media (max-width: 720px) {
+      .nav { height: auto; }
+      .nav-inner {
+        padding: .8rem 0;
+        height: auto;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .hero { padding-top: 8.6rem; }
+      .hero-title { font-size: clamp(3.1rem, 17vw, 5rem); }
+      .hero-sub { min-height: 5rem; }
+      .floating-note {
+        position: relative;
+        right: auto;
+        bottom: 0;
+        margin-top: 1rem;
+        max-width: 100%;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal, .slide-left, .slide-right { opacity: 1; transform: none; transition: none; }
+      .typed::after { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="nav" id="top">
+    <div class="nav-inner">
+      <a class="brand" href="#hero" aria-label="Pranav Oswal home">
+        <span class="brand-mark" aria-hidden="true">PO</span>
+        <span class="brand-text">Pranav Oswal</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#experience">Experience</a>
+        <a href="#credentials">Credentials</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section hero" id="hero">
+      <div class="hero-grid">
+        <div class="reveal slide-left">
+          <span class="eyebrow">Off/Beat core business application</span>
+          <h1 class="hero-title">PRANAV <span class="break">OSWAL</span></h1>
+          <p class="hero-sub"><span class="typed" id="typed-text" aria-live="polite"></span></p>
+          <div class="hero-meta">
+            <span class="chip">CA, all first attempt</span>
+            <span class="chip">CFA Level III Candidate</span>
+            <span class="chip">Finance × Strategy × Content</span>
+          </div>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#work">See What I’ve Built</a>
+            <a class="btn btn-secondary" href="#contact">Let’s Talk</a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal slide-right">
+          <figure class="photo-frame" id="photo-frame">
+            <img id="hero-photo" src="https://drive.google.com/thumbnail?id=1-I7EyM-O7G9MDRlqxPHIYpQsiibhOym2&sz=w1200" alt="Portrait of Pranav Oswal" width="1200" height="1450" referrerpolicy="no-referrer" />
+            <div class="photo-frame-fallback" id="photo-fallback" aria-hidden="true">
+              <div>
+                <strong>Pranav Oswal</strong>
+                <span>Finance, strategy, content, and startup energy — all in one frame.</span>
+              </div>
+            </div>
+          </figure>
+          <div class="floating-note">
+            <span>What matters</span>
+            <strong>Sharp finance thinking. Real operating range. Founder energy.</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-rule"></div>
+
+    <section class="section" id="about">
+      <div class="about-grid">
+        <div class="sticky-label reveal slide-left">
+          <span class="eyebrow">Who I am</span>
+          <h2>Built in finance. Curious about everything around it.</h2>
+          <p class="lede">I like difficult work, clean thinking, and ideas that can actually move people or organizations.</p>
+        </div>
+        <div class="about-copy reveal slide-right">
+          <p>I cleared CA Foundation with <span class="text-strong">AIR-38</span>, then cleared Intermediate and Final in the <span class="text-strong">first attempt every time</span>. That kind of rigor is still the backbone of how I work.</p>
+          <p>I’m currently a <span class="text-strong">CFA Level III Candidate</span>. But the bigger story is that I’ve never wanted to stay boxed into one narrow lane of finance.</p>
+          <p>I started at <span class="text-strong">PwC</span> in statutory audit across clients with turnover between ₹400 Cr and ₹6,000 Cr. Then I moved to <span class="text-strong">Mondelez</span>, where I worked on capex and manufacturing operations. After that, I joined <span class="text-strong">Motilal Oswal</span> as Investor Relations Manager, spending my time on investor communication, market-facing narratives, benchmarking, and public-market context.</p>
+          <p>Now I’m back at <span class="text-strong">Prakash M Oswal & Co.</span> as a consultant, helping professionalize my father’s firm and push it toward stronger advisory work, sharper systems, and a much more modern operating standard.</p>
+          <p>A big part of how I think was shaped outside India too. I spent a year in <span class="text-strong">Brazil as a Rotary Youth Exchange Ambassador</span>, learned Portuguese well enough to present in it, and addressed 1,500+ people at a Rotary District Conference. That experience made me calmer in unfamiliar rooms and much better at connecting across cultures.</p>
+          <p>I speak <span class="text-strong">English, Hindi, Marwadi, Marathi, Portuguese, and basic Spanish</span>. I’m obsessed with finance, strategy, content, and startups because all four reward clarity — and I like being the person who can bring clarity into the room.</p>
+          <div class="language-strip">
+            <span class="pill">English</span>
+            <span class="pill">Hindi</span>
+            <span class="pill">Marwadi</span>
+            <span class="pill">Marathi</span>
+            <span class="pill">Portuguese</span>
+            <span class="pill">Spanish (basic)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-rule"></div>
+
+    <section class="section" id="work">
+      <span class="eyebrow reveal">What I’ve built</span>
+      <h2 class="reveal">Real work. Real range.</h2>
+      <p class="reveal">The pattern is simple: I like work that is analytically solid, operationally useful, and presented with enough clarity that people actually pay attention.</p>
+
+      <div class="work-wrap">
+        <article class="theme-card reveal">
+          <div class="theme-label">
+            <div class="theme-symbol">01</div>
+            <h3>Finance & Valuation</h3>
+          </div>
+          <div class="theme-body">
+            <ul>
+              <li>Currently conducting a <strong>~₹550 Cr valuation</strong> of a construction company.</li>
+              <li>Prepared a complete <strong>vCFO Project Report</strong> for a manufacturing expansion across Maharashtra and Tamil Nadu: ₹14.42 Cr total investment, 75/25 debt-equity split, financial models, market analysis, ROI timelines, risk mitigants, and sustainability integration.</li>
+              <li>Actively manage my family’s <strong>equity and mutual fund portfolio</strong> using the capital markets understanding and network built during my time at Motilal Oswal.</li>
+            </ul>
+            <a class="inline-link" href="https://www.linkedin.com/posts/pranav-oswal-152758116_project-report-for-a-client-activity-7453322459816030208-9bhb" target="_blank" rel="noopener noreferrer">See the work →</a>
+          </div>
+        </article>
+
+        <article class="theme-card reveal">
+          <div class="theme-label">
+            <div class="theme-symbol">02</div>
+            <h3>Strategy & Operations</h3>
+          </div>
+          <div class="theme-body">
+            <ul>
+              <li>Led <strong>Peer Review Certification</strong> end-to-end at Prakash M Oswal &amp; Co. I spotted a foundational gap, drove the institutional process, and helped deliver a credential that permanently elevates the firm.</li>
+              <li>Built <strong>advanced Power BI MIS dashboards</strong> covering predictive cash flow modeling, SKU-level contribution margins, multi-entity consolidation across Tally, SAP, and ERP systems, and scenario simulation.</li>
+              <li>Currently upskilling in <strong>IndAS Conversion</strong> for upcoming client mandates.</li>
+            </ul>
+            <a class="inline-link" href="https://www.linkedin.com/posts/pranav-oswal-152758116_financialengineering-businessintelligence-activity-7449129738788409344--3zo" target="_blank" rel="noopener noreferrer">See the work →</a>
+          </div>
+        </article>
+
+        <article class="theme-card reveal">
+          <div class="theme-label">
+            <div class="theme-symbol">03</div>
+            <h3>Content & Brand</h3>
+          </div>
+          <div class="theme-body">
+            <ul>
+              <li>Created <strong>30 Unknown Icons of Indian Finance</strong>, an Instagram series spotlighting people who shaped Indian finance without always getting mainstream attention.</li>
+              <li>I built it for personal branding and financial literacy, but also because I believe strong ideas need distribution, not just depth.</li>
+              <li>Content, to me, is not decoration. It is evidence that you can form a point of view, package it clearly, and build an audience around it.</li>
+            </ul>
+            <a class="inline-link" href="https://www.instagram.com/reel/DYMqT8ltasZ/?igsh=MW44anA5cHl4b2lndQ==" target="_blank" rel="noopener noreferrer">Watch the series →</a>
+          </div>
+        </article>
+
+        <article class="theme-card reveal">
+          <div class="theme-label">
+            <div class="theme-symbol">04</div>
+            <h3>Leadership & Beyond</h3>
+          </div>
+          <div class="theme-body">
+            <ul>
+              <li><strong>Best Speaker</strong> — Innovision 2.0, startup pitch event by JITO Pune.</li>
+              <li><strong>Winner</strong> — ICAI Pune Debate Competition, and Regional Level Representative.</li>
+              <li><strong>Rotary Youth Exchange Ambassador</strong> to Brazil — addressed 1,500+ at Rotary District 4540 Annual Conference.</li>
+              <li><strong>Champion</strong> — PwC Pune Annual Table Tennis Tournament; state level TT player.</li>
+              <li><strong>Member</strong> — Poojan Charitable Trust; <strong>ISB & ICAI Masterclass</strong> on Leadership; <strong>Member</strong> — Rotex International Group, District 3131.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="section-rule"></div>
+
+    <section class="section" id="experience">
+      <span class="eyebrow reveal">Where I’ve been</span>
+      <h2 class="reveal">A clean timeline.</h2>
+      <div class="timeline">
+        <article class="timeline-item reveal">
+          <div class="timeline-meta">
+            <h3>Prakash M Oswal &amp; Co. — Consultant</h3>
+            <span>Jan 2026 – Present</span>
+          </div>
+          <p>Helping professionalize the firm, strengthen advisory capabilities, and build a more modern practice infrastructure.</p>
+        </article>
+        <article class="timeline-item reveal">
+          <div class="timeline-meta">
+            <h3>Motilal Oswal Financial Services — Investor Relations Manager</h3>
+            <span>Nov 2024 – Jan 2026</span>
+          </div>
+          <p>Worked on peer benchmarking, investor decks, Annual Report narrative sections including the Chairman’s message and MD&amp;A, plus analyst and investor communication.</p>
+        </article>
+        <article class="timeline-item reveal">
+          <div class="timeline-meta">
+            <h3>Mondelez India Foods — Capex / External Manufacturing</h3>
+            <span>May 2023 – Oct 2024</span>
+          </div>
+          <p>Executed ₹2.5 Cr capex ahead of schedule, worked on a ₹90 Cr spares audit, and drove a projected ₹1.1 Cr energy savings.</p>
+        </article>
+        <article class="timeline-item reveal">
+          <div class="timeline-meta">
+            <h3>PwC — Statutory Audit Articleship</h3>
+            <span>Oct 2021 – May 2023</span>
+          </div>
+          <p>Handled ₹400–6,000 Cr turnover clients, worked on IFC improvements, and mentored associates.</p>
+        </article>
+      </div>
+    </section>
+
+    <div class="section-rule"></div>
+
+    <section class="section" id="credentials">
+      <span class="eyebrow reveal">Credentials</span>
+      <h2 class="reveal">Compact, but meaningful.</h2>
+      <div class="credentials-box reveal">
+        <div class="badge-cloud">
+          <span class="pill">CA — All First Attempt (AIR-38 in Foundation)</span>
+          <span class="pill">CFA Level III Candidate</span>
+          <span class="pill">B.Com Banking — Symbiosis College (Grade A)</span>
+          <span class="pill">Power BI</span>
+          <span class="pill">Tally</span>
+          <span class="pill">SAP</span>
+          <span class="pill">Excel</span>
+          <span class="pill">Python (basics)</span>
+          <span class="pill">6 Languages</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-rule"></div>
+
+    <section class="section" id="contact">
+      <div class="contact-grid">
+        <div class="reveal slide-left">
+          <span class="eyebrow">Let’s talk</span>
+          <h2 class="contact-statement">I build things, break things down, and make finance feel human. If that sounds useful to you — let’s talk.</h2>
+        </div>
+        <div class="reveal slide-right">
+          <div class="contact-links">
+            <div class="contact-item">
+              <div>
+                <span class="label">Email</span>
+                <a href="mailto:ppo.pune@gmail.com">ppo.pune@gmail.com</a>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div>
+                <span class="label">Phone</span>
+                <a href="tel:+918208448928">+91 82084 48928</a>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div>
+                <span class="label">LinkedIn</span>
+                <a href="https://www.linkedin.com/in/pranav-oswal-152758116" target="_blank" rel="noopener noreferrer">Find me here →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="section">
+    <div class="footer-note">
+      <span>Stripped back. Dark. Cleaner.</span>
+      <a href="#top">Back to top</a>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.querySelector('.nav');
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 16);
+    });
+
+    const typedEl = document.getElementById('typed-text');
+    const lines = [
+      'Chartered Accountant. First attempt, every time.',
+      'CFA Level III Candidate.',
+      'The guy who turns balance sheets into stories.',
+      'Finance nerd. Content creator. Builder.'
+    ];
+
+    if (typedEl) {
+      if (prefersReduced) {
+        typedEl.textContent = lines[0];
+      } else {
+        let lineIndex = 0;
+        let charIndex = 0;
+        let deleting = false;
+        function tick() {
+          const current = lines[lineIndex];
+          typedEl.textContent = deleting ? current.slice(0, charIndex--) : current.slice(0, charIndex++);
+          let speed = deleting ? 35 : 60;
+          if (!deleting && charIndex === current.length + 1) {
+            deleting = true;
+            speed = 1300;
+          } else if (deleting && charIndex < 0) {
+            deleting = false;
+            lineIndex = (lineIndex + 1) % lines.length;
+            charIndex = 0;
+            speed = 260;
+          }
+          setTimeout(tick, speed);
+        }
+        tick();
+      }
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('in-view');
+      });
+    }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    const heroPhoto = document.getElementById('hero-photo');
+    const fallback = document.getElementById('photo-fallback');
+    if (heroPhoto && fallback) {
+      heroPhoto.addEventListener('error', () => {
+        heroPhoto.style.display = 'none';
+        fallback.style.display = 'flex';
+      });
+    }
+  </script>
+</body>
+</html>
